@@ -1,0 +1,46 @@
+button.pf-v6-c-toggle-group__button.pf-m-selected:disabled {
+    background-color: var(--pf-v6-c-toggle-group__button--m-selected--BackgroundColor);
+    color: var(--pf-v6-c-toggle-group__button--m-selected--Color);
+}
+
+/*
+ * Inherit same color as rest of masthead, instead of blue.
+ */
+a[href="/main/search"] {
+    color: inherit;
+}
+
+/*
+ * Popover baseline style rule has .pf-v6-c-popover__close + * selector.
+ *
+ * Adjust padding for bodyContent={<PopoverBodyContent headerContent={…} />} prop,
+ * because accessibility work-around renders header as child of body instead of sibling preceding body.
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:has#browser_compatibility
+ */
+
+.pf-v6-c-popover__close + .pf-v6-c-popover__body:has(> .pf-v6-c-popover__header) {
+    padding-inline-end: 0;
+}
+
+.pf-v6-c-popover__close + .pf-v6-c-popover__body > .pf-v6-c-popover__header {
+    padding-inline-end: var(--pf-v6-c-popover__close--sibling--PaddingInlineEnd);
+}
+
+/*
+ * Fix lack of color contrast in label of ChromePicker element.
+ */
+.chrome-picker input,
+.chrome-picker label {
+    color: var(--pf-t--global--text--color--regular) !important; /* instead of #969696 */
+}
+
+
+/*
+ * Forces the main dashboard to display a scrollbar unconditionally. This is needed to prevent an infinite
+ * screen flicker at specific screen resolutions where the Victory chart resize observer triggers a resize event
+ * infinitely and shifts the grid layout between 2x3 and 3x2.
+ */
+#main-page-container > div:has(#main-dashboard-widget-gallery) {
+    overflow-y: scroll !important;
+}

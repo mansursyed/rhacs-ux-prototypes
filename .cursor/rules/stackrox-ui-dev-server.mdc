@@ -1,0 +1,48 @@
+---
+description: How to start the StackRox UI dev server with live data from the staging demo
+alwaysApply: false
+---
+
+# StackRox UI Dev Server
+
+When the user asks to start, run, or load the StackRox UI, use this setup:
+
+## Start Command
+
+Read the token from `.secrets/stackrox-api-token` and pass it as an env var:
+
+```bash
+CYPRESS_COMPONENT_TEST=true \
+UI_START_TARGET=https://***REMOVED*** \
+ROX_API_TOKEN="$(cat ../../.secrets/stackrox-api-token)" \
+npm start
+```
+
+Run from `stackrox/ui/` (workspace root is `rhacs-ux-prototypes/`). The UI will be at `http://localhost:3000/`.
+
+For offline prototypes, run `node stackrox/ui/apps/platform/mock-api.js` from the workspace root, then start the UI with `UI_START_TARGET=http://localhost:8444` instead of staging.
+
+## Environment Variables
+
+| Variable | Purpose |
+|---|---|
+| `CYPRESS_COMPONENT_TEST=true` | Disables SSL so the dev server runs plain HTTP (avoids self-signed cert issues) |
+| `UI_START_TARGET` | Proxy target for API requests — points to the staging Central instance |
+| `ROX_API_TOKEN` | JWT API token injected into proxy headers and client-side localStorage for automatic auth |
+
+## API Token Location
+
+The token lives at the workspace root: `.secrets/stackrox-api-token` (gitignored). **NEVER** commit, push, or paste this token into tracked files, commits, PRs, or chat messages. If the token expires, generate a new one from the staging Central UI under Platform Configuration > Integrations > API Token and update the file.
+
+## How Auth Works
+
+Two things make auto-login work (both require `ROX_API_TOKEN`):
+
+1. **Proxy-side**: `setupProxy.js` injects `Authorization: Bearer [REDACTED] on all proxied API requests
+2. **Client-side**: `index.tsx` writes the token to `localStorage` (`access_token` key) on startup, so the auth saga sees the user as logged in
+
+## Troubleshooting
+
+- **Blank page / login screen**: Clear localStorage for `localhost:3000` in DevTools, then refresh
+- **Port 3000 in use**: Kill stale processes with `lsof -ti :3000 | xargs kill -9`
+- **API 403 errors**: The API token may have expired — generate a new one from the staging Central

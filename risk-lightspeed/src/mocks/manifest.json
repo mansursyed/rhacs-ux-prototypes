@@ -1,0 +1,20 @@
+{
+  "prototypes": [
+    {
+      "id": "baseline",
+      "label": "Baseline",
+      "description": "StackRox source-of-truth Risk list and detail (no Lightspeed)."
+    },
+    {
+      "id": "v1",
+      "label": "v1 — Lightspeed",
+      "description": "Baseline Risk plus Investigate with Lightspeed on deployment detail."
+    },
+    {
+      "id": "v2",
+      "label": "v2 — Eng feedback",
+      "description": "Lightspeed plus updated payment-api mock factors for feedback."
+    }
+  ],
+  "default": "baseline"
+}

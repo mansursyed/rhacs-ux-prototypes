@@ -1,0 +1,1 @@
+{"userId":"mock-admin","authProvider":{"id":"mock","name":"Mock","type":"basic"},"userInfo":{"username":"admin","friendlyName":"Mock Admin","permissions":{"resourceToAccess":{}}},"userAttributes":[{"key":"role","values":["Admin"]}],"expires":"2099-01-01T00:00:00Z"}

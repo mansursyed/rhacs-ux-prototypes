@@ -1,0 +1,26 @@
+---
+description: RHACS UX prototypes workspace layout — SoT vs feature Pages folders
+alwaysApply: true
+---
+
+# Workspace structure
+
+## Source of truth
+
+- `stackrox/` is the main product UI clone (`github.com/stackrox/stackrox`).
+- Prefer designing and exploring against the **local live UI** in `stackrox/ui/` with staging (`UI_START_TARGET` + `ROX_API_TOKEN` from `.secrets/`).
+- Do not treat feature prototype folders as the product SoT.
+
+## Feature subfolders
+
+- Each effort lives in a top-level folder (e.g. `risk-lightspeed/`) built off the current `stackrox/` UI.
+- These folders are static click-through prototypes (MSW + in-repo mock JSON) meant for GitHub Pages share links.
+- Support multiple versions (baseline / v1 / v2…) with a switcher and `?prototype=` links so eng feedback can iterate without destroying prior options.
+- Pages URL: `https://mansursyed.github.io/rhacs-ux-prototypes/<feature>/`
+
+## Lifecycle
+
+1. Pull / refresh `stackrox/` from upstream.
+2. Work live against staging in `stackrox/`.
+3. Branch a feature prototype folder for shareable review.
+4. When the real change ships upstream, pull latest into `stackrox/` and base future work on that.

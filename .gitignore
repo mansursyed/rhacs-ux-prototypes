@@ -1,0 +1,12 @@
+# Nested upstream StackRox clone — local source of truth (own git remote)
+stackrox/
+
+# Local credentials — never commit
+.secrets/
+
+# Feature prototype build output (source stays tracked)
+**/dist/
+**/node_modules/
+
+.DS_Store
+*.log

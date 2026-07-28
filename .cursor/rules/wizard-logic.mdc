@@ -1,0 +1,46 @@
+---
+description: Multi-step wizard form patterns for StackRox policy and compliance wizards
+globs: stackrox/ui/apps/platform/src/Containers/**/Wizard/**/*.tsx
+alwaysApply: false
+---
+
+# Wizard Form Patterns
+
+## Existing Wizards
+
+The project has two major wizard implementations — follow their conventions:
+
+- `Containers/Policies/Wizard/` — Policy wizard (6 steps, Formik + FormikProvider)
+- `Containers/ComplianceEnhanced/Schedules/Wizard/` — Scan config wizard (useFormikScanConfig hook)
+
+Also: `Containers/Vulnerabilities/VulnerablityReporting/ModifyVulnReport/ReportFormWizard.tsx`
+
+## State Management
+
+- Use Formik for all wizard form state. Prefer `useFormik` + `FormikProvider` at the wizard root so steps can access context via `useFormikContext`.
+- Each step must be its own component file (e.g. `Step1.tsx`, `ProfileSelection.tsx`). Steps must not own form state — they read and write through `useFormikContext` or `useField`.
+- Define a validation schema per step using Yup (see `policyValidationSchemas.ts` as a reference).
+
+```typescript
+// Wizard root pattern
+const formik = useFormik({ initialValues, validationSchema, onSubmit });
+return (
+    <FormikProvider value={formik}>
+        <PatternFlyWizard steps={[...]} />
+    </FormikProvider>
+);
+
+// Step component pattern
+function StepN() {
+    const { values, setFieldValue } = useFormikContext<WizardFormValues>();
+    // render step fields
+}
+```
+
+## Adding New API Fields
+
+When a wizard adds or modifies API fields:
+
+1. Update the TypeScript types in `types/` to match the proto/API schema.
+2. Update `initialValues` and the Yup validation schema in the wizard.
+3. The project does not use MSW. Mocks live in `cypress/mocks/` for Cypress component tests. If a `.test.tsx` or Cypress test covers the wizard, update those fixtures too.

@@ -1,0 +1,118 @@
+{
+  "deployments": [
+    {
+      "deployment": {
+        "id": "***REMOVED***",
+        "name": "***REMOVED***",
+        "namespace": "***REMOVED***",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2025-01-27T23:09:33Z",
+        "type": "Deployment",
+        "priority": "1",
+        "riskScore": 225
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": true
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "aaaa1111-1111-1111-1111-111111111111",
+        "name": "frontend-web",
+        "namespace": "ecommerce",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2026-06-01T08:30:00Z",
+        "type": "Deployment",
+        "priority": "4",
+        "riskScore": 6
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": false
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "bbbb2222-2222-2222-2222-222222222222",
+        "name": "payment-api",
+        "namespace": "ecommerce",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2025-11-20T14:00:00Z",
+        "type": "Deployment",
+        "priority": "2",
+        "riskScore": 120
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": true
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "cccc3333-3333-3333-3333-333333333333",
+        "name": "redis-cache",
+        "namespace": "ecommerce",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2026-05-10T12:00:00Z",
+        "type": "Deployment",
+        "priority": "5",
+        "riskScore": 3
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": false
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "dddd4444-4444-4444-4444-444444444444",
+        "name": "monitoring-agent",
+        "namespace": "observability",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2026-03-01T09:00:00Z",
+        "type": "Deployment",
+        "priority": "3",
+        "riskScore": 24
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": false
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "eeee5555-5555-5555-5555-555555555555",
+        "name": "inventory-service",
+        "namespace": "warehouse",
+        "cluster": "***REMOVED***",
+        "clusterName": "***REMOVED***",
+        "clusterId": "***REMOVED***",
+        "created": "2026-06-20T16:00:00Z",
+        "type": "Deployment",
+        "priority": "6",
+        "riskScore": 2
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": false
+        }
+      ]
+    }
+  ]
+}

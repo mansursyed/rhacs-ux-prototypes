@@ -1,0 +1,77 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'risk-lightspeed/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: risk-lightspeed/package-lock.json
+      - name: Build risk-lightspeed
+        working-directory: risk-lightspeed
+        env:
+          VITE_BASE_PATH: /rhacs-ux-prototypes/risk-lightspeed/
+        run: |
+          npm ci
+          npm run build
+          cp dist/index.html dist/404.html
+      - name: Assemble site
+        run: |
+          mkdir -p site/risk-lightspeed
+          cp -R risk-lightspeed/dist/. site/risk-lightspeed/
+          cat > site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <title>RHACS UX Prototypes</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <style>
+                body { font-family: system-ui, sans-serif; margin: 2rem; line-height: 1.5; }
+                a { color: #06c; }
+              </style>
+            </head>
+            <body>
+              <h1>RHACS UX Prototypes</h1>
+              <ul>
+                <li>
+                  <a href="risk-lightspeed/?prototype=v1">Risk Lightspeed</a>
+                  — baseline / v1 Lightspeed / v2 eng feedback
+                </li>
+              </ul>
+            </body>
+          </html>
+          EOF
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

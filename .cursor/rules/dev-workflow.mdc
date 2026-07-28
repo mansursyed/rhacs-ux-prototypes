@@ -1,0 +1,40 @@
+---
+description: StackRox UI development workflow — reuse, aliases, and test hygiene
+alwaysApply: true
+---
+
+# StackRox UI Dev Workflow
+
+## Before Creating a New Component
+
+Search these directories first — the project has 60+ reusable components:
+
+- `Components/PatternFly/` — PF wrappers (modals, loading states, icons, charts)
+- `Components/` root — shared components (forms, selects, search filters, tables, pagination, timeline)
+- `Components/CompoundSearchFilter/` — search/filter patterns
+- `Components/TableStateTemplates/` — empty/error/loading table states
+
+If a component already exists, extend or compose it instead of creating a new one.
+
+## Path Aliases
+
+The project uses tsconfig path aliases. Always import via alias, not relative:
+
+```typescript
+// Correct
+import LoadingSection from 'Components/PatternFly/LoadingSection/LoadingSection';
+import { fetchClusters } from 'services/ClustersService';
+import useRestQuery from 'hooks/useRestQuery';
+
+// Wrong
+import LoadingSection from '../../../Components/PatternFly/LoadingSection/LoadingSection';
+```
+
+Available aliases: `Components`, `Containers`, `constants`, `hooks`, `images`, `init`, `messages`, `providers`, `queries`, `reducers`, `sagas`, `services`, `sorters`, `test-utils`, `types`, `utils`, and a catch-all `*` → `./src/*`.
+
+## Test Hygiene
+
+- If a `.test.tsx` or `.test.ts` file exists alongside a component you modify, you must update the tests to cover your changes.
+- Tests use **Vitest** + **Testing Library** (`@testing-library/react`). No MSW — API calls are mocked via `vi.mock()` or direct service mocks.
+- Cypress component tests live in `cypress/` with mocks in `cypress/mocks/`.
+- Run tests with `npm test` from `stackrox/ui/`.

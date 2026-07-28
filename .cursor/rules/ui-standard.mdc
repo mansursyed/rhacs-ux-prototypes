@@ -1,0 +1,39 @@
+---
+description: PatternFly and Red Hat UI standards for StackRox frontend code
+globs: stackrox/ui/apps/platform/src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# StackRox UI Standards
+
+## Component Library
+
+- Use `@patternfly/react-core`, `@patternfly/react-table`, `@patternfly/react-icons`, and `@patternfly/react-charts` for all UI elements.
+- Check `Components/PatternFly/` for project-specific PF wrappers (e.g. `LoadingSection`, `ConfirmationModal`, `ErrorBoundary`, `IconText`) before importing PF directly.
+- Never introduce a third-party UI component when PatternFly already provides the equivalent.
+
+## Component Patterns
+
+- Functional components only — no class components.
+- All props must have explicit TypeScript interfaces or type aliases. No `any` props.
+- Colocate related files: component, types, utils, and test in the same directory.
+
+## Styling
+
+- Use PatternFly utility classes (`pf-v6-u-*`) for spacing, alignment, and layout.
+- Do not write custom CSS unless PatternFly utility classes cannot achieve the layout. If custom CSS is needed, use a colocated `.css` file — not inline styles or styled-components.
+- Never override PatternFly design tokens or CSS variables.
+
+## Imports
+
+- Use the path aliases from `tsconfig.json` (e.g. `Components/`, `Containers/`, `hooks/`, `services/`, `utils/`). Never use relative paths that climb above `src/`.
+- Import PatternFly components from their top-level packages, not deep subpaths.
+
+```typescript
+// Correct
+import { Button, Alert } from '@patternfly/react-core';
+import { Table, Thead, Tr, Th, Td, Tbody } from '@patternfly/react-table';
+
+// Wrong
+import Button from '@patternfly/react-core/dist/esm/components/Button';
+```

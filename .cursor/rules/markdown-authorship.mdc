@@ -1,0 +1,18 @@
+---
+description: Author attribution for markdown files created in this workspace
+alwaysApply: true
+---
+# Markdown Authorship
+
+When creating or drafting a new markdown file, include an author attribution block near the top (after the title):
+
+```
+Author: [Mansur Syed](mailto:masyed@redhat.com)
+Co-Author: {LLM tool name, e.g. "Cursor (Claude Opus 4.6)"}
+```
+
+- Always link Mansur's name to `mailto:masyed@redhat.com`.
+- For the Co-Author, use the actual model or tool name powering the current session (e.g. "Cursor (Claude Opus 4.6)", "Cursor (GPT-5.3)"). Be specific — don't write a generic placeholder.
+- Place the block immediately after the top-level heading, before any other content.
+- When editing an existing `.md` file that is missing the authorship block, add it.
+- Do not duplicate the block if authorship info is already present.

@@ -1,0 +1,110 @@
+html,
+body {
+  height: 100%;
+}
+
+/* Prototype chrome: non-Risk nav is visual-only */
+.acs-nav-sidebar .acs-nav-disabled {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pf-t--global--spacer--sm);
+  padding-block: var(--pf-t--global--spacer--sm);
+  padding-inline: var(--pf-t--global--spacer--md);
+  color: var(--pf-t--global--text--color--regular);
+  filter: blur(1.5px);
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+  cursor: default;
+}
+
+.acs-nav-sidebar .acs-nav-disabled__chevron {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+}
+
+.acs-nav-sidebar .acs-nav-disabled__badge {
+  margin-inline-start: var(--pf-t--global--spacer--sm);
+  padding: 0 var(--pf-t--global--spacer--xs);
+  border: var(--pf-t--global--border--width--regular) solid
+    var(--pf-t--global--border--color--default);
+  border-radius: var(--pf-t--global--border--radius--small);
+  font-size: var(--pf-t--global--font--size--xs);
+}
+
+/* Classic SearchFilterInput / react-select look (SoT NetworkSearch.css + ValueContainer) */
+.acs-search-filter-stub {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 36px;
+  box-sizing: border-box;
+  border: var(--pf-t--global--border--width--regular) solid
+    var(--pf-t--global--border--color--default);
+  border-radius: 0;
+  background-color: var(--pf-t--global--background--color--primary--default);
+  color: var(--base-500, var(--pf-t--global--text--color--subtle));
+  font-size: var(--pf-t--global--font--size--md);
+  cursor: default;
+}
+
+.acs-search-filter-stub__icon {
+  display: flex;
+  align-items: center;
+  padding-inline-start: var(--pf-t--global--spacer--sm);
+  padding-inline-end: var(--pf-t--global--spacer--xs);
+  color: var(--base-500, var(--pf-t--global--text--color--subtle));
+  pointer-events: none;
+}
+
+.acs-search-filter-stub__placeholder {
+  flex: 1;
+  min-width: 0;
+  padding-block: var(--pf-t--global--spacer--xs);
+  color: var(--base-500, var(--pf-t--global--text--color--subtle));
+  pointer-events: none;
+}
+
+.acs-search-filter-stub__chevron {
+  display: flex;
+  align-items: center;
+  padding-inline-end: var(--pf-t--global--spacer--sm);
+  color: var(--base-500, var(--pf-t--global--text--color--subtle));
+  pointer-events: none;
+}
+
+/* Floating prototype switcher — keeps masthead staging-accurate */
+.acs-prototype-dock {
+  position: fixed;
+  z-index: 1000;
+  inset-block-end: var(--pf-t--global--spacer--md);
+  inset-inline-start: var(--pf-t--global--spacer--md);
+  display: flex;
+  align-items: center;
+  gap: var(--pf-t--global--spacer--sm);
+  padding: var(--pf-t--global--spacer--sm) var(--pf-t--global--spacer--md);
+  background: var(--pf-t--global--background--color--primary--default);
+  border: var(--pf-t--global--border--width--regular) solid
+    var(--pf-t--global--border--color--default);
+  border-radius: var(--pf-t--global--border--radius--small);
+  box-shadow: var(--pf-t--global--box-shadow--sm);
+}
+
+.acs-prototype-dock .version-switcher {
+  padding-right: 0;
+}
+
+.acs-prototype-dock .version-switcher .pf-v6-c-form-control {
+  min-width: 10rem;
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

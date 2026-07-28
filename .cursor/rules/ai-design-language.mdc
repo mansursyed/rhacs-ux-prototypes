@@ -1,0 +1,66 @@
+---
+description: Red Hat AI design language standards — apply whenever building, reviewing, or modifying AI-enabled features, AI-generated content, chatbots, virtual assistants, or any UI that involves AI
+alwaysApply: true
+---
+
+# Red Hat AI Design Language Standards
+
+Follow these standards whenever implementing AI-related UI features. Source: Red Hat Brand & Experience Design Team deck (March 2026).
+
+## Core Principles
+
+1. **Be transparent** — always make it clear when and how AI is being used. Err on the side of over-communicating.
+2. **Personable, not human** — AI follows Red Hat voice and tone but never pretends the user is talking to a human.
+3. **Stay within the design system** — AI features must use PatternFly and Red Hat Design System standards. No special styling that sets AI apart from the rest of the product.
+
+## Transparency Notices (Required)
+
+- Every AI-enabled interaction needs **at minimum one visual AND one verbal indicator** (e.g., sparkle icon + "with AI" button text).
+- Place the icon **before** the disclosure text. No tooltips on disclosure messages.
+- AI-generated content (summaries, search results) must include a label + icon (e.g., "AI-assisted" heading with sparkle icon).
+- For AI-assisted features beyond basic labeling, add a **text notice at the start** of the experience.
+- For virtual assistants / chatbots:
+  - Before interaction: *"This feature uses AI technology. Do not include any personal information or other sensitive information in your input."*
+  - Persistent notice near input/output: *"Always review AI-generated content prior to use."*
+- Consider additional indicators for high-risk interactions (consult AIA Reviewers).
+
+## Iconography
+
+Use the official Red Hat AI sparkle UI icons. Do NOT create custom AI icons.
+
+**Information icons:** `ai-info`, `ai-error`, `ai-experience`
+**Action icons:** `ai-edit`, `ai-troubleshoot`, `ai-filter`, `ai-search`, `ai-create`, `ai-enhance`
+
+Rules:
+- Always **pair AI icons with text** ("...with AI", "...by AI", or similar). Icon alone is not enough.
+- Do NOT use brains or robots for AI features (robots are reserved for chatbot avatars only).
+- Do NOT change AI icon colors or modify them — use the same colors as other UI icons in the interface.
+- Do NOT use AI sparkle icons without an accompanying AI disclosure.
+- Do NOT use AI sparkle to mean "new" — use `rh-ui-icon-new` instead.
+- Do NOT add sparkles to technology icons.
+
+## Color
+
+- **Do NOT use color or gradients to indicate AI.** AI features use the exact same color tokens as non-AI interface elements.
+- Do NOT color-code AI features differently from the rest of the UI. This conflicts with established status colors (red=danger, green=success, blue=interactive, etc.).
+- No gradient fills or gradient borders on AI elements.
+
+## Chatbot Avatars
+
+- All chatbots use the **Red Hat robot icon** as their avatar. No other icons, no custom robots.
+- Robot variations (happy, annoyed, bewildered, sad) exist for personality — do NOT use them for state changes or alerts.
+- Use PatternFly **non-status color tokens** for avatar styling. Avoid `success-green`, `interaction-blue`, and `danger-red`.
+- Launch buttons for chatbots use the robot icon with PatternFly icon button variants (primary, secondary, inverse depending on context).
+- Do NOT use gradient fills/borders on chatbot launch buttons.
+
+## Animation
+
+- Use the **premade sparkle animation** only — triggered on hover, rollover, or click.
+- Loop **once**, then return to rest state. The AI sparkle must be visible at rest.
+- Do NOT auto-play or endlessly loop animations.
+- Animation stays within the **same bounding box** as the static icon (no padding changes).
+- Do NOT create exaggerated or over-the-top animations.
+
+## Compliance Reminder
+
+AI design guidance does not replace AI Assessments, Privacy Impact Assessments, or other required internal reviews. For external-facing AI features, always consult AIA Reviewers.
