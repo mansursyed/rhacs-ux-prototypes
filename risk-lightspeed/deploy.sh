@@ -11,12 +11,12 @@ export VITE_BASE_PATH="${VITE_BASE_PATH:-/rhacs-ux-prototypes/risk-lightspeed/}"
 echo "Building with base ${VITE_BASE_PATH}"
 npm run build
 
-# SPA fallback for GitHub Pages deep links
+# SPA fallback for GitHub Pages deep links (also copy to site root 404.html in CI)
 cp dist/index.html dist/404.html
 
 echo ""
 echo "Build ready in dist/"
-echo "Share URL: https://mansursyed.github.io/rhacs-ux-prototypes/risk-lightspeed/?prototype=v1"
+echo "Share URL: https://mansursyed.github.io/rhacs-ux-prototypes/risk-lightspeed/main/risk/workloads?filteredWorkflowView=Applications%20view&prototype=baseline"
 echo ""
-echo "To publish from the repo root (gh-pages / Actions), commit this folder and push main,"
-echo "or copy dist/ contents to the Pages publishing branch under risk-lightspeed/."
+echo "Note: GitHub Pages needs site/404.html (repo publish root) = this index.html for deep links."
+echo "The Pages workflow copies dist/index.html to site/404.html on deploy."

@@ -39,6 +39,10 @@ jobs:
         run: |
           mkdir -p site/risk-lightspeed
           cp -R risk-lightspeed/dist/. site/risk-lightspeed/
+          # GitHub Pages only serves the *repo-root* 404.html for missing paths.
+          # Deep SPA links like /risk-lightspeed/main/risk/workloads need this at site/.
+          # Built index uses absolute asset URLs under /rhacs-ux-prototypes/risk-lightspeed/.
+          cp risk-lightspeed/dist/index.html site/404.html
           cat > site/index.html <<'EOF'
           <!doctype html>
           <html lang="en">
@@ -55,8 +59,8 @@ jobs:
               <h1>RHACS UX Prototypes</h1>
               <ul>
                 <li>
-                  <a href="risk-lightspeed/?prototype=v1">Risk Lightspeed</a>
-                  — baseline / v1 Lightspeed / v2 eng feedback
+                  <a href="risk-lightspeed/main/risk/workloads?filteredWorkflowView=Applications%20view&amp;prototype=baseline">Risk Lightspeed</a>
+                  — classic staging Risk (baseline / v1 Lightspeed / v2)
                 </li>
               </ul>
             </body>
