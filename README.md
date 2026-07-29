@@ -36,7 +36,7 @@ From `stackrox/ui/`:
 
 ```bash
 CYPRESS_COMPONENT_TEST=true \
-UI_START_TARGET=https://***REMOVED*** \
+UI_START_TARGET=https://staging.demo.stackrox.com \
 ROX_API_TOKEN="$(cat ../../.secrets/stackrox-api-token)" \
 npm start
 ```

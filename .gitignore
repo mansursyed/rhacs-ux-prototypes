@@ -12,6 +12,6 @@ stackrox/
 *.log
 
 # Staging API dumps may contain live tokens — never commit
-***REMOVED***-risk-export.json
+mid-server-risk-export.json
 *-risk-export.json
 .git-filter-repo-expressions.txt
