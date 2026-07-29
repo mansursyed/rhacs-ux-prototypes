@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run mocks:check && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "mocks:check": "node scripts/check-mocks-safe.mjs",
     "deploy:build": "./deploy.sh"
   },
   "dependencies": {

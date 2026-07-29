@@ -1,0 +1,151 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111101",
+    "name": "sync-worker",
+    "hash": "266535729250594202",
+    "type": "Deployment",
+    "namespace": "ops",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111101",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "sync-worker"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "sync-worker"
+      },
+      "requirements": []
+    },
+    "created": "2025-08-12T15:22:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111101:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "0",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111101",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/sync-worker",
+            "tag": "2.4.0",
+            "fullName": "quay.io/demo/sync-worker:2.4.0"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [
+            "NET_ADMIN"
+          ],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": true
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "1",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 210,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111101",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111101",
+      "namespace": "ops",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 210,
+    "results": [
+      {
+        "name": "Suspicious Process Executions",
+        "factors": [
+          {
+            "message": "Process \"/bin/sh\" executed with demo-synthetic arguments that download a script (no live credentials included)",
+            "url": ""
+          },
+          {
+            "message": "Process \"curl\" executed with demo-synthetic Authorization header placeholder Bearer [DEMO_REDACTED]",
+            "url": ""
+          }
+        ],
+        "score": 8
+      },
+      {
+        "name": "Components Useful for Attackers",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" contains components useful for attackers: curl, wget",
+            "url": ""
+          }
+        ],
+        "score": 4
+      },
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" contains 48 CVEs with severities ranging between Moderate and Critical",
+            "url": ""
+          }
+        ],
+        "score": 5
+      },
+      {
+        "name": "Service Account Permission Level",
+        "factors": [
+          {
+            "message": "Service account \"default\" is likely to have elevated permissions in this demo scenario",
+            "url": ""
+          }
+        ],
+        "score": 3
+      }
+    ]
+  }
+}

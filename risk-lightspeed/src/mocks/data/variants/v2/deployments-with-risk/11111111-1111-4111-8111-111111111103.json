@@ -1,0 +1,141 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111103",
+    "name": "checkout-api",
+    "hash": "481290835375969150",
+    "type": "Deployment",
+    "namespace": "shop",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111103",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "checkout-api"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "checkout-api"
+      },
+      "requirements": []
+    },
+    "created": "2025-11-20T14:00:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111103:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "0",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111103",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/checkout-api",
+            "tag": "1.9.1-demo",
+            "fullName": "quay.io/demo/checkout-api:1.9.1-demo"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [
+            "SYS_PTRACE"
+          ],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": true
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "2",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 128,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111103",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111103",
+      "namespace": "shop",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 128,
+    "results": [
+      {
+        "name": "Suspicious Process Executions",
+        "factors": [
+          {
+            "message": "Process \"python\" executed with demo-synthetic arguments indicating lateral movement tooling (synthetic only)",
+            "url": ""
+          },
+          {
+            "message": "Process \"curl\" executed with demo-synthetic arguments posting to an internal callback URL (no secrets)",
+            "url": ""
+          }
+        ],
+        "score": 7
+      },
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/checkout-api:1.9.1-demo\" contains 44 CVEs with severities ranging between Moderate and Critical",
+            "url": ""
+          }
+        ],
+        "score": 5
+      },
+      {
+        "name": "Components Useful for Attackers",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/checkout-api:1.9.1-demo\" contains components useful for attackers: nmap, tcpdump, socat",
+            "url": ""
+          }
+        ],
+        "score": 4
+      }
+    ]
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111102",
+    "name": "storefront-web",
+    "hash": "138573964327989860",
+    "type": "Deployment",
+    "namespace": "shop",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111102",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "storefront-web"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "storefront-web"
+      },
+      "requirements": []
+    },
+    "created": "2026-06-01T08:30:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111102:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "1000",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111102",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/storefront",
+            "tag": "3.2.1",
+            "fullName": "quay.io/demo/storefront:3.2.1"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": false
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "4",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 6,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111102",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111102",
+      "namespace": "shop",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 6,
+    "results": [
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/storefront:3.2.1\" contains 12 CVEs with severities ranging between Moderate and Important",
+            "url": ""
+          }
+        ],
+        "score": 2.5
+      },
+      {
+        "name": "Image Freshness",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/storefront:3.2.1\" is 42 days old",
+            "url": ""
+          }
+        ],
+        "score": 1
+      },
+      {
+        "name": "Number of Components in Image",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/storefront:3.2.1\" contains 127 components",
+            "url": ""
+          }
+        ],
+        "score": 1
+      },
+      {
+        "name": "Service Reachability",
+        "factors": [
+          {
+            "message": "Deployment is externally reachable via port(s) 8080/TCP",
+            "url": ""
+          }
+        ],
+        "score": 1.5
+      }
+    ]
+  }
+}

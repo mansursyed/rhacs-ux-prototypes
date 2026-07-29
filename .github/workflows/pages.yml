@@ -33,6 +33,7 @@ jobs:
           VITE_BASE_PATH: /rhacs-ux-prototypes/risk-lightspeed/
         run: |
           npm ci
+          npm run mocks:check
           npm run build
           cp dist/index.html dist/404.html
       - name: Assemble site

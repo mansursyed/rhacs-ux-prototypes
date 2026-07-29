@@ -1,0 +1,135 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111106",
+    "name": "catalog-service",
+    "hash": "835099043890909333",
+    "type": "Deployment",
+    "namespace": "data-plane",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111106",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "catalog-service"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "catalog-service"
+      },
+      "requirements": []
+    },
+    "created": "2026-03-18T11:45:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111106:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "1000",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111106",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/catalog-service",
+            "tag": "4.1.0",
+            "fullName": "quay.io/demo/catalog-service:4.1.0"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": false
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "3",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 18,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111106",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111106",
+      "namespace": "data-plane",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 18,
+    "results": [
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/catalog-service:4.1.0\" contains 19 CVEs with severities ranging between Moderate and Important",
+            "url": ""
+          }
+        ],
+        "score": 3
+      },
+      {
+        "name": "Service Reachability",
+        "factors": [
+          {
+            "message": "Deployment is reachable within the cluster via port(s) 8443/TCP",
+            "url": ""
+          }
+        ],
+        "score": 2
+      },
+      {
+        "name": "Number of Components in Image",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/catalog-service:4.1.0\" contains 210 components",
+            "url": ""
+          }
+        ],
+        "score": 1.5
+      }
+    ]
+  }
+}

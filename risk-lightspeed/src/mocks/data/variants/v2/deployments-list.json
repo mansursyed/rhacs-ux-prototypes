@@ -2,16 +2,16 @@
   "deployments": [
     {
       "deployment": {
-        "id": "***REMOVED***",
-        "name": "***REMOVED***",
-        "namespace": "***REMOVED***",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
-        "created": "2025-01-27T23:09:33Z",
+        "id": "11111111-1111-4111-8111-111111111101",
+        "name": "sync-worker",
+        "namespace": "ops",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+        "created": "2025-08-12T15:22:00Z",
         "type": "Deployment",
         "priority": "1",
-        "riskScore": 225
+        "riskScore": 210
       },
       "baselineStatuses": [
         {
@@ -21,12 +21,31 @@
     },
     {
       "deployment": {
-        "id": "aaaa1111-1111-1111-1111-111111111111",
-        "name": "frontend-web",
-        "namespace": "ecommerce",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
+        "id": "11111111-1111-4111-8111-111111111103",
+        "name": "checkout-api",
+        "namespace": "shop",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+        "created": "2025-11-20T14:00:00Z",
+        "type": "Deployment",
+        "priority": "2",
+        "riskScore": 128
+      },
+      "baselineStatuses": [
+        {
+          "anomalousProcessesExecuted": true
+        }
+      ]
+    },
+    {
+      "deployment": {
+        "id": "11111111-1111-4111-8111-111111111102",
+        "name": "storefront-web",
+        "namespace": "shop",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
         "created": "2026-06-01T08:30:00Z",
         "type": "Deployment",
         "priority": "4",
@@ -40,31 +59,12 @@
     },
     {
       "deployment": {
-        "id": "bbbb2222-2222-2222-2222-222222222222",
-        "name": "payment-api",
-        "namespace": "ecommerce",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
-        "created": "2025-11-20T14:00:00Z",
-        "type": "Deployment",
-        "priority": "2",
-        "riskScore": 120
-      },
-      "baselineStatuses": [
-        {
-          "anomalousProcessesExecuted": true
-        }
-      ]
-    },
-    {
-      "deployment": {
-        "id": "cccc3333-3333-3333-3333-333333333333",
-        "name": "redis-cache",
-        "namespace": "ecommerce",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
+        "id": "11111111-1111-4111-8111-111111111104",
+        "name": "session-cache",
+        "namespace": "shop",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
         "created": "2026-05-10T12:00:00Z",
         "type": "Deployment",
         "priority": "5",
@@ -78,16 +78,16 @@
     },
     {
       "deployment": {
-        "id": "dddd4444-4444-4444-4444-444444444444",
-        "name": "monitoring-agent",
-        "namespace": "observability",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
-        "created": "2026-03-01T09:00:00Z",
+        "id": "11111111-1111-4111-8111-111111111105",
+        "name": "metrics-agent",
+        "namespace": "ops",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+        "created": "2026-04-02T09:15:00Z",
         "type": "Deployment",
-        "priority": "3",
-        "riskScore": 24
+        "priority": "6",
+        "riskScore": 2
       },
       "baselineStatuses": [
         {
@@ -97,16 +97,16 @@
     },
     {
       "deployment": {
-        "id": "eeee5555-5555-5555-5555-555555555555",
-        "name": "inventory-service",
-        "namespace": "warehouse",
-        "cluster": "***REMOVED***",
-        "clusterName": "***REMOVED***",
-        "clusterId": "***REMOVED***",
-        "created": "2026-06-20T16:00:00Z",
+        "id": "11111111-1111-4111-8111-111111111106",
+        "name": "catalog-service",
+        "namespace": "data-plane",
+        "cluster": "demo-secured-cluster",
+        "clusterName": "demo-secured-cluster",
+        "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+        "created": "2026-03-18T11:45:00Z",
         "type": "Deployment",
-        "priority": "6",
-        "riskScore": 2
+        "priority": "3",
+        "riskScore": 18
       },
       "baselineStatuses": [
         {

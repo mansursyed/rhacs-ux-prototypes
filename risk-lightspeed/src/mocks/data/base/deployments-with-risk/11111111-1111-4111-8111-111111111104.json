@@ -1,0 +1,135 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111104",
+    "name": "session-cache",
+    "hash": "708632390408736418",
+    "type": "Deployment",
+    "namespace": "shop",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111104",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "session-cache"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "session-cache"
+      },
+      "requirements": []
+    },
+    "created": "2026-05-10T12:00:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111104:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "1000",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111104",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/session-cache",
+            "tag": "7.2.0",
+            "fullName": "quay.io/demo/session-cache:7.2.0"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": false
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "5",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 3,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111104",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111104",
+      "namespace": "shop",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 3,
+    "results": [
+      {
+        "name": "Image Freshness",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/session-cache:7.2.0\" is 18 days old",
+            "url": ""
+          }
+        ],
+        "score": 1
+      },
+      {
+        "name": "Number of Components in Image",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/session-cache:7.2.0\" contains 64 components",
+            "url": ""
+          }
+        ],
+        "score": 1
+      },
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/session-cache:7.2.0\" contains 3 CVEs with severities ranging between Low and Moderate",
+            "url": ""
+          }
+        ],
+        "score": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "deployment": {
+    "id": "11111111-1111-4111-8111-111111111105",
+    "name": "metrics-agent",
+    "hash": "772159071584424020",
+    "type": "Deployment",
+    "namespace": "ops",
+    "namespaceId": "bbbbbbbb-bbbb-4bbb-8bbb-111111111105",
+    "orchestratorComponent": false,
+    "replicas": "1",
+    "labels": {},
+    "podLabels": {
+      "app": "metrics-agent"
+    },
+    "labelSelector": {
+      "matchLabels": {
+        "app": "metrics-agent"
+      },
+      "requirements": []
+    },
+    "created": "2026-04-02T09:15:00Z",
+    "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+    "clusterName": "demo-secured-cluster",
+    "containers": [
+      {
+        "id": "11111111-1111-4111-8111-111111111105:container",
+        "config": {
+          "command": [],
+          "args": [],
+          "directory": "",
+          "user": "",
+          "uid": "1000",
+          "appArmorProfile": ""
+        },
+        "image": {
+          "id": "sha256:11111111111141118111111111111105",
+          "name": {
+            "registry": "quay.io",
+            "remote": "demo/metrics-agent",
+            "tag": "0.8.1",
+            "fullName": "quay.io/demo/metrics-agent:0.8.1"
+          },
+          "notPullable": false,
+          "isClusterLocal": false
+        },
+        "securityContext": {
+          "privileged": false,
+          "selinux": null,
+          "dropCapabilities": [
+            "ALL"
+          ],
+          "addCapabilities": [],
+          "readOnlyRootFilesystem": true,
+          "seccompProfile": null,
+          "allowPrivilegeEscalation": false
+        },
+        "volumes": [],
+        "ports": [],
+        "secrets": [],
+        "resources": {
+          "cpuCoresRequest": 0.25,
+          "cpuCoresLimit": 1,
+          "memoryMbRequest": 256,
+          "memoryMbLimit": 512
+        },
+        "name": "container",
+        "livenessProbe": {
+          "defined": true
+        },
+        "readinessProbe": {
+          "defined": true
+        },
+        "type": "REGULAR"
+      }
+    ],
+    "annotations": {},
+    "priority": "6",
+    "inactive": false,
+    "imagePullSecrets": [],
+    "serviceAccount": "default",
+    "serviceAccountPermissionLevel": "DEFAULT",
+    "automountServiceAccountToken": false,
+    "hostNetwork": false,
+    "hostPid": false,
+    "hostIpc": false,
+    "runtimeClass": "",
+    "tolerations": [],
+    "ports": [],
+    "stateTimestamp": "1700000000000000",
+    "riskScore": 2,
+    "platformComponent": false
+  },
+  "risk": {
+    "id": "deployment:11111111-1111-4111-8111-111111111105",
+    "subject": {
+      "id": "11111111-1111-4111-8111-111111111105",
+      "namespace": "ops",
+      "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
+      "type": "DEPLOYMENT"
+    },
+    "score": 2,
+    "results": [
+      {
+        "name": "Image Freshness",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/metrics-agent:0.8.1\" is 9 days old",
+            "url": ""
+          }
+        ],
+        "score": 1
+      },
+      {
+        "name": "Image Vulnerabilities",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/metrics-agent:0.8.1\" contains 1 CVEs with severities ranging between Low and Low",
+            "url": ""
+          }
+        ],
+        "score": 1
+      }
+    ]
+  }
+}

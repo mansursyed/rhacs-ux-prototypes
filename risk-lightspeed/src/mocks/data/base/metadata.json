@@ -1,1 +1,6 @@
-{"version":"4.7.0-mock","buildFlavor":"release","releaseBuild":true,"licenseStatus":"VALID"}
+{
+  "version": "0.0.0-demo",
+  "buildFlavor": "release",
+  "releaseBuild": true,
+  "licenseStatus": "VALID"
+}
