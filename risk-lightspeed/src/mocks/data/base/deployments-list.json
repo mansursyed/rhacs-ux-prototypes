@@ -11,7 +11,7 @@
         "created": "2025-08-12T15:22:00Z",
         "type": "Deployment",
         "priority": "1",
-        "riskScore": 210
+        "riskScore": 95
       },
       "baselineStatuses": [
         {
@@ -30,7 +30,7 @@
         "created": "2025-11-20T14:00:00Z",
         "type": "Deployment",
         "priority": "2",
-        "riskScore": 96
+        "riskScore": 22.8
       },
       "baselineStatuses": [
         {

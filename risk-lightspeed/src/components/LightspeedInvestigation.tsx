@@ -11,17 +11,22 @@ import {
 } from '@patternfly/react-core';
 import { CopyIcon, MagicIcon, TimesIcon } from '@patternfly/react-icons';
 import type { DeploymentWithRisk } from '../services/DeploymentsService';
-import { normalizeRiskScore } from '../utils/riskScores';
+import {
+  RISK_CATEGORY_DISPLAY_NAME,
+  RISK_CATEGORY_MAX_WEIGHT,
+  conciseRiskInsight,
+  contributingRiskResults,
+  formatMultiplier,
+  getRiskSeverity,
+  normalizeRiskScore,
+  severityLabel,
+} from '../utils/riskScores';
 
 const TICK_INTERVAL_MS = 12;
 const CHARS_PER_TICK = 3;
 
 function getImageFullName(data: DeploymentWithRisk): string {
   return data.deployment.containers?.[0]?.image?.name?.fullName ?? 'unknown image';
-}
-
-function getContainerName(data: DeploymentWithRisk): string {
-  return data.deployment.containers?.[0]?.name ?? 'container';
 }
 
 function getCveCount(data: DeploymentWithRisk): number {
@@ -73,7 +78,19 @@ function getAttackerTools(data: DeploymentWithRisk): string[] {
   return Array.from(tools);
 }
 
-export function generateSummary(data: DeploymentWithRisk): string {
+export type GenerateSummaryOptions = {
+  /**
+   * v1 — Lightspeed: classic summary + narrative breakdown + Immediate Actions (default).
+   * v2 — Lightspeed: concise score drivers / weights; no Immediate Actions.
+   */
+  variant?: 'v1' | 'v2';
+};
+
+export function generateSummary(
+  data: DeploymentWithRisk,
+  options: GenerateSummaryOptions = {}
+): string {
+  const { variant = 'v1' } = options;
   const { deployment, risk } = data;
   const ns = deployment.namespace;
   const name = deployment.name;
@@ -94,10 +111,14 @@ export function generateSummary(data: DeploymentWithRisk): string {
     deployment.containers?.[0]?.resources?.memoryMbLimit === 0;
   const writableRoot =
     deployment.containers?.[0]?.securityContext?.readOnlyRootFilesystem === false;
+
+  if (variant === 'v2') {
+    return generateV2Summary(data, { name, normalizedScore });
+  }
+
+  // --- v1 — Lightspeed (unchanged classic briefing) ---
   const componentCount = getComponentCount(data);
   const attackerTools = getAttackerTools(data);
-  getContainerName(data);
-
   const lines: string[] = [];
   lines.push('SUMMARY');
 
@@ -231,13 +252,115 @@ export function generateSummary(data: DeploymentWithRisk): string {
   return lines.join('\n');
 }
 
+function generateV2Summary(
+  data: DeploymentWithRisk,
+  ctx: { name: string; normalizedScore: number }
+): string {
+  const { risk } = data;
+  const { name, normalizedScore } = ctx;
+  const severity = severityLabel(getRiskSeverity(normalizedScore));
+  const contributors = contributingRiskResults(risk.results);
+  const topDrivers = contributors.slice(0, 3);
+  const otherDrivers = contributors.slice(3);
+
+  const lines: string[] = [];
+  lines.push('SUMMARY');
+
+  const driverLabels = topDrivers
+    .map((r) => RISK_CATEGORY_DISPLAY_NAME[r.name] ?? r.name)
+    .slice(0, 2);
+  const driverPhrase =
+    driverLabels.length > 0
+      ? ` Main drivers: ${driverLabels.join(' and ').toLowerCase()}.`
+      : '';
+  lines.push(
+    `${name} scores ${normalizedScore}/100 (${severity}).${driverPhrase} Treat the highest-weight multipliers first — they dominate the score.`
+  );
+
+  lines.push('');
+  lines.push('RISK BREAKDOWN');
+
+  if (contributors.length === 0) {
+    lines.push('No elevated indicators (all multipliers ≈ 1×).');
+  } else {
+    lines.push(
+      `Score ${normalizedScore}/100 (${severity}). Categories multiply together; higher × values move the score more.`
+    );
+    lines.push('');
+    lines.push('Top drivers:');
+    lines.push('');
+    topDrivers.forEach((result, index) => {
+      const label = RISK_CATEGORY_DISPLAY_NAME[result.name] ?? result.name;
+      const maxWeight = RISK_CATEGORY_MAX_WEIGHT[result.name];
+      const weight =
+        maxWeight != null
+          ? `${formatMultiplier(result.score)}× of ${formatMultiplier(maxWeight)}×`
+          : `${formatMultiplier(result.score)}×`;
+      lines.push(`${index + 1}. ${label} (${weight}) — ${conciseRiskInsight(result)}`);
+    });
+
+    if (otherDrivers.length > 0) {
+      const also = otherDrivers
+        .map((r) => {
+          const label = RISK_CATEGORY_DISPLAY_NAME[r.name] ?? r.name;
+          return `${label} (${formatMultiplier(r.score)}×)`;
+        })
+        .join('; ');
+      lines.push('');
+      lines.push('Also contributing:');
+      lines.push(also + '.');
+    }
+
+    const focus = topDrivers
+      .slice(0, 2)
+      .map((r) => conciseRiskInsight(r))
+      .join('; ');
+    if (focus) {
+      lines.push('');
+      lines.push('Focus first:');
+      lines.push(focus + '.');
+    }
+  }
+
+  return lines.join('\n');
+}
+
 const sectionLabelStyle: React.CSSProperties = {
   fontWeight: 700,
   fontSize: '13px',
   letterSpacing: '0.5px',
   color: 'var(--pf-t--global--color--nonstatus--gray--text, #6a6e73)',
-  marginBottom: '4px',
-  marginTop: '12px',
+  marginBottom: '8px',
+  marginTop: '20px',
+};
+
+const subsectionLabelStyle: React.CSSProperties = {
+  fontWeight: 600,
+  fontSize: '13px',
+  color: 'var(--pf-t--global--text--color--regular, #151515)',
+  marginTop: '14px',
+  marginBottom: '6px',
+};
+
+const bodyLineStyle: React.CSSProperties = {
+  lineHeight: 1.55,
+  marginBottom: '8px',
+  fontSize: '14px',
+};
+
+const driverLineStyle: React.CSSProperties = {
+  lineHeight: 1.55,
+  marginBottom: '10px',
+  marginLeft: '4px',
+  fontSize: '14px',
+};
+
+const focusLineStyle: React.CSSProperties = {
+  lineHeight: 1.55,
+  marginTop: '4px',
+  marginBottom: '8px',
+  fontSize: '14px',
+  fontWeight: 500,
 };
 
 const commandStyle: React.CSSProperties = {
@@ -248,15 +371,28 @@ const commandStyle: React.CSSProperties = {
   borderRadius: '4px',
   display: 'block',
   overflowX: 'auto',
-  margin: '4px 0 8px 0',
+  margin: '4px 0 12px 0',
   lineHeight: 1.5,
   whiteSpace: 'pre',
 };
 
 const SECTION_LABELS = ['SUMMARY', 'RISK BREAKDOWN', 'IMMEDIATE ACTIONS'];
+const SUBSECTION_LABELS = ['Top drivers:', 'Also contributing:', 'Focus first:'];
 
 function isOcCommand(line: string): boolean {
   return line.startsWith('oc ') || line.startsWith('oc -');
+}
+
+function isDriverLine(line: string): boolean {
+  return /^\d+\.\s/.test(line.trim());
+}
+
+function isFocusLine(line: string): boolean {
+  return line.trim().startsWith('Focus first:');
+}
+
+function isAlsoLine(line: string): boolean {
+  return line.trim().startsWith('Also contributing:');
 }
 
 export function renderFormattedText(text: string) {
@@ -265,26 +401,63 @@ export function renderFormattedText(text: string) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    const trimmed = line.trim();
 
-    if (SECTION_LABELS.includes(line.trim())) {
+    if (trimmed === '') {
+      elements.push(<div key={`sp-${i}`} style={{ height: '8px' }} aria-hidden />);
+      continue;
+    }
+
+    if (SECTION_LABELS.includes(trimmed)) {
       elements.push(
         <div key={i} style={i === 0 ? { ...sectionLabelStyle, marginTop: 0 } : sectionLabelStyle}>
-          {line}
+          {trimmed}
         </div>
       );
-    } else if (isOcCommand(line)) {
+      continue;
+    }
+
+    if (SUBSECTION_LABELS.includes(trimmed)) {
+      elements.push(
+        <div key={i} style={subsectionLabelStyle}>
+          {trimmed}
+        </div>
+      );
+      continue;
+    }
+
+    if (isOcCommand(trimmed)) {
       elements.push(
         <code key={i} style={commandStyle}>
-          {line}
+          {trimmed}
         </code>
       );
-    } else if (line.trim() !== '') {
+      continue;
+    }
+
+    if (isDriverLine(trimmed)) {
       elements.push(
-        <div key={i} style={{ lineHeight: 1.5, marginBottom: '2px', fontSize: '14px' }}>
-          {line}
+        <div key={i} style={driverLineStyle}>
+          {trimmed}
         </div>
       );
+      continue;
     }
+
+    if (isFocusLine(trimmed) || isAlsoLine(trimmed)) {
+      elements.push(
+        <div key={i} style={isFocusLine(trimmed) ? focusLineStyle : bodyLineStyle}>
+          {trimmed}
+        </div>
+      );
+      continue;
+    }
+
+    elements.push(
+      <div key={i} style={bodyLineStyle}>
+        {trimmed}
+      </div>
+    );
   }
 
   return elements;
@@ -294,14 +467,17 @@ type LightspeedInvestigationProps = {
   data: DeploymentWithRisk;
   onClose: () => void;
   title?: string;
+  /** v1 = classic briefing; v2 = concise score-driver breakdown. */
+  variant?: 'v1' | 'v2';
 };
 
 function LightspeedInvestigation({
   data,
   onClose,
   title = 'AI-assisted investigation',
+  variant = 'v1',
 }: LightspeedInvestigationProps) {
-  const fullText = useMemo(() => generateSummary(data), [data]);
+  const fullText = useMemo(() => generateSummary(data, { variant }), [data, variant]);
   const [charCount, setCharCount] = useState(0);
   const [copied, setCopied] = useState(false);
   const isStreaming = charCount < fullText.length;

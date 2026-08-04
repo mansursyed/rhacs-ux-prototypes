@@ -81,7 +81,7 @@ function RiskDetailsPage(): ReactElement {
 
   const deploymentName = data?.deployment.name;
   const panelTitle =
-    version === 'v2' ? 'AI risk briefing (eng feedback)' : 'AI-assisted investigation';
+    version === 'v2' ? 'AI risk briefing' : 'AI-assisted investigation';
 
   return (
     <>
@@ -137,6 +137,7 @@ function RiskDetailsPage(): ReactElement {
                 data={data}
                 onClose={() => setShowPanel(false)}
                 title={panelTitle}
+                variant={version === 'v2' ? 'v2' : 'v1'}
               />
             </PageSection>
           )}

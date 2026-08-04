@@ -89,7 +89,7 @@
     "tolerations": [],
     "ports": [],
     "stateTimestamp": "1700000000000000",
-    "riskScore": 210,
+    "riskScore": 95,
     "platformComponent": false
   },
   "risk": {
@@ -100,7 +100,7 @@
       "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
       "type": "DEPLOYMENT"
     },
-    "score": 210,
+    "score": 95,
     "results": [
       {
         "name": "Suspicious Process Executions",
@@ -114,17 +114,7 @@
             "url": ""
           }
         ],
-        "score": 8
-      },
-      {
-        "name": "Components Useful for Attackers",
-        "factors": [
-          {
-            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" contains components useful for attackers: curl, wget",
-            "url": ""
-          }
-        ],
-        "score": 4
+        "score": 3.9
       },
       {
         "name": "Image Vulnerabilities",
@@ -134,17 +124,47 @@
             "url": ""
           }
         ],
-        "score": 5
+        "score": 3.8
       },
       {
-        "name": "Service Account Permission Level",
+        "name": "Service Configuration",
         "factors": [
           {
             "message": "Service account \"default\" is likely to have elevated permissions in this demo scenario",
             "url": ""
           }
         ],
-        "score": 3
+        "score": 1.9
+      },
+      {
+        "name": "Components Useful for Attackers",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" contains components useful for attackers: curl, wget",
+            "url": ""
+          }
+        ],
+        "score": 1.5
+      },
+      {
+        "name": "Image Freshness",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" is 240 days old",
+            "url": ""
+          }
+        ],
+        "score": 1.5
+      },
+      {
+        "name": "Number of Components in Image",
+        "factors": [
+          {
+            "message": "Image \"quay.io/demo/sync-worker:2.4.0\" contains 620 components",
+            "url": ""
+          }
+        ],
+        "score": 1.5
       }
     ]
   }

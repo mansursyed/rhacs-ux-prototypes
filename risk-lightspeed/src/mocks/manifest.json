@@ -12,8 +12,8 @@
     },
     {
       "id": "v2",
-      "label": "v2 — Eng feedback",
-      "description": "Lightspeed plus updated payment-api mock factors for feedback."
+      "label": "v2 — Lightspeed",
+      "description": "Lightspeed with risk-indicator breakdown (no Immediate Actions)."
     }
   ],
   "default": "baseline"

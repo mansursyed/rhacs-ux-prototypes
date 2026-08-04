@@ -87,7 +87,7 @@
     "tolerations": [],
     "ports": [],
     "stateTimestamp": "1700000000000000",
-    "riskScore": 96,
+    "riskScore": 22.8,
     "platformComponent": false
   },
   "risk": {
@@ -98,7 +98,7 @@
       "clusterId": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeee0001",
       "type": "DEPLOYMENT"
     },
-    "score": 96,
+    "score": 22.8,
     "results": [
       {
         "name": "Suspicious Process Executions",
@@ -108,7 +108,7 @@
             "url": ""
           }
         ],
-        "score": 6
+        "score": 3.8
       },
       {
         "name": "Image Vulnerabilities",
@@ -128,7 +128,7 @@
             "url": ""
           }
         ],
-        "score": 3
+        "score": 1.5
       }
     ]
   }
