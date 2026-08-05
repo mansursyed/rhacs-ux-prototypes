@@ -3,17 +3,17 @@
     {
       "id": "baseline",
       "label": "Baseline",
-      "description": "StackRox source-of-truth Risk list and detail (no Lightspeed)."
+      "description": "Original source of truth from the GitHub StackRox codebase."
     },
     {
       "id": "v1",
-      "label": "v1 — Lightspeed",
-      "description": "Baseline Risk plus Investigate with Lightspeed on deployment detail."
+      "label": "v1 Lightspeed",
+      "description": "Lightspeed summarization with remediation actions."
     },
     {
       "id": "v2",
-      "label": "v2 — Lightspeed",
-      "description": "Lightspeed with risk-indicator breakdown (no Immediate Actions)."
+      "label": "v2 Lightspeed w/ PM edits",
+      "description": "Lightspeed summarization with risk factors, no remediation."
     }
   ],
   "default": "baseline"

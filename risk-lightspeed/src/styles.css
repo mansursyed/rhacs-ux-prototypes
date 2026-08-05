@@ -74,29 +74,60 @@ body {
   pointer-events: none;
 }
 
-/* Floating prototype switcher — keeps masthead staging-accurate */
+/* Floating prototype switcher — prominent dock (separate from product chrome) */
 .acs-prototype-dock {
   position: fixed;
   z-index: 1000;
   inset-block-end: var(--pf-t--global--spacer--md);
   inset-inline-start: var(--pf-t--global--spacer--md);
-  display: flex;
-  align-items: center;
-  gap: var(--pf-t--global--spacer--sm);
-  padding: var(--pf-t--global--spacer--sm) var(--pf-t--global--spacer--md);
-  background: var(--pf-t--global--background--color--primary--default);
+  max-width: min(22rem, calc(100vw - 2 * var(--pf-t--global--spacer--md)));
+  padding: var(--pf-t--global--spacer--md);
+  background: var(--pf-t--global--color--brand--default);
   border: var(--pf-t--global--border--width--regular) solid
-    var(--pf-t--global--border--color--default);
-  border-radius: var(--pf-t--global--border--radius--small);
-  box-shadow: var(--pf-t--global--box-shadow--sm);
+    var(--pf-t--global--border--color--on-brand--default, transparent);
+  border-radius: var(--pf-t--global--border--radius--medium);
+  box-shadow: var(--pf-t--global--box-shadow--lg);
+  color: var(--pf-t--global--text--color--on-brand--default, #fff);
 }
 
 .acs-prototype-dock .version-switcher {
-  padding-right: 0;
+  width: 100%;
 }
 
-.acs-prototype-dock .version-switcher .pf-v6-c-form-control {
-  min-width: 10rem;
+.acs-prototype-dock .version-switcher__title {
+  font-size: var(--pf-t--global--font--size--md);
+  font-weight: var(--pf-t--global--font--weight--body--bold);
+  line-height: var(--pf-t--global--font--line-height--body);
+  color: var(--pf-t--global--text--color--on-brand--default, #fff);
+}
+
+.acs-prototype-dock .version-switcher__icon-btn.pf-v6-c-button {
+  --pf-v6-c-button--m-plain--Color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  --pf-v6-c-button--m-plain--hover--Color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  --pf-v6-c-button--m-plain--focus--Color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  --pf-v6-c-button--m-plain--active--Color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  --pf-v6-c-button--PaddingInlineStart: var(--pf-t--global--spacer--xs);
+  --pf-v6-c-button--PaddingInlineEnd: var(--pf-t--global--spacer--xs);
+  color: var(--pf-t--global--text--color--on-brand--default, #fff);
+}
+
+.acs-prototype-dock .version-switcher__icon-btn.pf-v6-c-button .pf-v6-c-button__icon,
+.acs-prototype-dock .version-switcher__icon-btn.pf-v6-c-button svg {
+  color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  fill: var(--pf-t--global--text--color--on-brand--default, #fff);
+}
+
+.acs-prototype-dock .version-switcher__icon-btn.pf-v6-c-button:hover {
+  color: var(--pf-t--global--text--color--on-brand--default, #fff);
+  background: rgb(255 255 255 / 12%);
+}
+
+.acs-prototype-dock .version-switcher__toggle {
+  width: 100%;
+  min-width: 14rem;
+  justify-content: space-between;
+  background: var(--pf-t--global--background--color--primary--default);
+  color: var(--pf-t--global--text--color--regular);
 }
 
 .cursor-blink {
